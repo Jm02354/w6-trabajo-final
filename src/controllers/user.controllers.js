@@ -23,9 +23,10 @@ const remove = catchError(async(req, res) => {
 const update = catchError(async(req, res) => {
   const { id } = req.params;
   
-  delete res.body.email
-  delete res.body.password
-  delete res.body.phone
+  const columns = ['email', 'password', 'phone']
+  columns.forEach((column) => {
+    delete req.body[column]
+  })
 
   const result = await User.update(
         req.body,
