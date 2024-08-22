@@ -61,16 +61,38 @@ test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 2",
   expect(res.body).toHaveLength(2)
 })
 
-// test("POST -> 'BASE_URL/LOGIN', should return statusCode 200, and res.body.user.email === user.email", async () => {
-//   const user = {
-//     email: "rjimenez@gmail.com",
-//     password: "raul123"
-//   }
+//LOGIN
+test("POST -> 'BASE_URL/LOGIN', should return statusCode 200, and res.body.user.email === user.email", async () => {
+  const hits = {
+    email: "rjimenez@gmail.com",
+    password: "raul123"
+  }
 
-//   const res = await request(app)
-//     .post(`${BASE_URL}/login`)
-//     .send(user)
-// })
+  const res = await request(app)
+    .post(`${BASE_URL}/login`)
+    .send(hits)
+  
+  expect(res.statusCode).toBe(200)
+  expect(res.body).toBeDefined()
+  expect(res.body.user).toBeDefined()
+  expect(res.body.token).toBeDefined()
+  expect(res.body.user.email).toBe(hits.email)
+})
+
+//TEST ERROR
+test("POST -> 'BASE_URL/LOGIN', should return statusCode 401", async () => {
+  const hits = {
+    email: "rjimenez@gmail.com",
+    password: "invalidPassword"
+  }
+  const res = await request(app)
+    .post(`${BASE_URL}/login`)
+    .send(hits)
+  
+  expect(res.statusCode).toBe(401)
+})
+
+
 
 //Endpoint PUT
 test("PUT -> BASE_URL/userId, should return statusCode 200, and res.body.firstName === userUpdate.firstName", async () => {
@@ -84,13 +106,12 @@ test("PUT -> BASE_URL/userId, should return statusCode 200, and res.body.firstNa
     .set('Authorization', `Bearer ${TOKEN}`)
     .send(userUpdate)
     
-  
   expect(res.statusCode).toBe(200)
   expect(res.body).toBeDefined()
   expect(res.body.firstName).toBe(userUpdate.firstName)
 })
 
-// //Endpoint DELETE
+//Endpoint DELETE
 test("DELETE -> BASE_URL/userId, should return statusCode 204, and res.body.firstName === user.firstName", async () => {
   const res = await request(app)
     .delete(`${BASE_URL}/${userId}`)
