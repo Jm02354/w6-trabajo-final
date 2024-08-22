@@ -25,6 +25,7 @@ const category =  {
   
 const BASE_URL = '/api/v1/categories'
 
+//ENDPOINT POST
 test("POST -> BASE_URL, should return statusCode 201, and res.body.name === category.name", async () => {
 
   const res = await request(app)
@@ -39,6 +40,7 @@ test("POST -> BASE_URL, should return statusCode 201, and res.body.name === cate
   expect(res.body.name).toBe(category.name)
 })
 
+//ENDPOINT GET
 test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 1", async () => {
 
   const res = await request(app)
@@ -47,4 +49,14 @@ test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 1",
   expect(res.statusCode).toBe(200)
   expect(res.body).toBeDefined()
   expect(res.body).toHaveLength(1)
+})
+
+//ENDPOINT DELETE
+test("DELETE -> BASE_URL/categoryId, should return statusCode 204, and res.body.name === category.name", async () => {
+
+  const res = await request(app)
+    .delete(`${BASE_URL}/${categoryId}`)
+    .set('Authorization', `Bearer ${TOKEN}`)
+
+  expect(res.statusCode).toBe(204)
 })

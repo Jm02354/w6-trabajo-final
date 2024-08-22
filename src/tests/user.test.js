@@ -31,7 +31,7 @@ const user = {
 
 const BASE_URL = '/api/v1/users'
 
-//Endpoint POST 
+//ENDPOINT POST 
 test("POST -> BASE_URL, should return statusCode 201, and res.body.firstName === user.firstName", async () => {
   
   const columns = ['firstName', 'lastName', 'email', 'password', 'phone']
@@ -49,7 +49,7 @@ test("POST -> BASE_URL, should return statusCode 201, and res.body.firstName ===
   // expect(res.body.firstName).toBe(user.firstName)
 })
 
-// //Endpoint GET
+// //ENDPOINT GET
 test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 2", async () => {
 
   const res = await request(app)
@@ -61,7 +61,7 @@ test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 2",
   expect(res.body).toHaveLength(2)
 })
 
-//LOGIN
+//ENDPOINT LOGIN
 test("POST -> 'BASE_URL/LOGIN', should return statusCode 200, and res.body.user.email === user.email", async () => {
   const hits = {
     email: "rjimenez@gmail.com",
@@ -79,7 +79,7 @@ test("POST -> 'BASE_URL/LOGIN', should return statusCode 200, and res.body.user.
   expect(res.body.user.email).toBe(hits.email)
 })
 
-//TEST ERROR
+//TEST ERROR - ENDPOINT LOGIN
 test("POST -> 'BASE_URL/LOGIN', should return statusCode 401", async () => {
   const hits = {
     email: "rjimenez@gmail.com",
@@ -94,7 +94,7 @@ test("POST -> 'BASE_URL/LOGIN', should return statusCode 401", async () => {
 
 
 
-//Endpoint PUT
+//ENDPOINT PUT
 test("PUT -> BASE_URL/userId, should return statusCode 200, and res.body.firstName === userUpdate.firstName", async () => {
 
   const userUpdate = {
@@ -111,7 +111,7 @@ test("PUT -> BASE_URL/userId, should return statusCode 200, and res.body.firstNa
   expect(res.body.firstName).toBe(userUpdate.firstName)
 })
 
-//Endpoint DELETE
+//ENDPOINT DELETE
 test("DELETE -> BASE_URL/userId, should return statusCode 204, and res.body.firstName === user.firstName", async () => {
   const res = await request(app)
     .delete(`${BASE_URL}/${userId}`)
