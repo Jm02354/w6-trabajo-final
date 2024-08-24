@@ -9,8 +9,7 @@ routerCategory.route('/')
     .post(verifyJwt, create);
 
 routerCategory.route('/:id')
-    .get(getOne)
     .delete(verifyJwt, remove)
-    .put(update);
+
 
 module.exports = routerCategory;
