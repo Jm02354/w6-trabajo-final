@@ -65,8 +65,6 @@ test("GET -> BASE_URL, should return statusCode 200, and res.body.length === 1",
   expect(res.statusCode).toBe(200)
   expect(res.body).toBeDefined()
   expect(res.body).toHaveLength(1)
-
-
 })
 
 //ENDPOINT GETONE
