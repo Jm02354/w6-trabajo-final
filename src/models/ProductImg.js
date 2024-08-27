@@ -11,8 +11,8 @@ const ProductImg = sequelize.define('productImg', {
         allowNull: false
     },
   //productId
-    }, {
+  
+}, {
     timestamps: false
 });
-
 module.exports = ProductImg;  
