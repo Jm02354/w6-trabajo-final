@@ -6,7 +6,6 @@ const errorHandler = require('./utils/errorHandler');
 require('dotenv').config();
 const path = require('path');
 
-
 // Esta es nuestra aplicación
 const app = express();
 
